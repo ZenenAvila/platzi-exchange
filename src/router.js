@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Router from "vue-router";
 import Home from "@/views/Home";
+import Error from "@/views/Error";
 import About from "@/views/About";
 //import { component } from 'vue/types/umd'
 
@@ -19,6 +20,11 @@ export default new Router({
       path: "/about",
       name: "about",
       component: About,
+    },
+    {
+      path: "*",
+      name: "Error",
+      component: Error,
     },
   ],
 });
