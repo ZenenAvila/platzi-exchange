@@ -1,12 +1,13 @@
 <template>
   <div>
+    <bounce-loader :loading="isLoading" :color="'#68d391'" :size="100" />
     <router-link to="/about" class="mt-5 text-xl text-green-600 hover:underline"
       >Ir a about</router-link
     >
     <br />
     <h1>
       <br />
-      <px-assets-table :assets="assets" />
+      <px-assets-table v-if="!isLoading" :assets="assets" />
     </h1>
   </div>
 </template>
@@ -21,12 +22,17 @@ export default {
 
   data() {
     return {
+      isLoading: false,
       assets: [],
     };
   },
 
   created() {
-    api.getAssets().then((assets) => (this.assets = assets));
+    this.isLoading = true;
+    api
+      .getAssets()
+      .then((assets) => (this.assets = assets))
+      .finally(() => (this.isLoading = false));
   },
 };
 </script>
